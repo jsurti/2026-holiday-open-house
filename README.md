@@ -1,3 +1,15 @@
+# Holiday Open House 2026
+
+**Live:**
+- Invite: https://2026-holiday.washburnsurti.com
+- Host page: https://2026-holiday.washburnsurti.com/host
+- Vercel project: `2026-holiday-open-house` (jsurtis-projects), London region, Upstash Redis attached
+- DNS: Squarespace CNAME `2026-holiday` → `24b3a908555af318.vercel-dns-017.com`
+
+Every push to `main` on GitHub redeploys automatically.
+
+---
+
 # Holiday Open House — invitation, RSVPs & comment wall
 
 Guests open a red envelope with a gold wax seal, the card slides out, and below it they can RSVP, see who's coming and leave a message. You manage everything from a private host page.
