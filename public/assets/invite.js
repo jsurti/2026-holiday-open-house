@@ -140,6 +140,8 @@
       setTimeout(() => env.classList.add('card-out'), t[1]);
       setTimeout(() => { window.scrollTo(0, 0); showInvite(true); }, t[2]);
     }, { once: false });
+    // Tapping anywhere on the envelope screen (e.g. "Tap to open") opens it too
+    stage.addEventListener('click', e => { if (!env.contains(e.target)) env.click(); });
   }
 
   /* ---------------- Calendar menu ---------------- */

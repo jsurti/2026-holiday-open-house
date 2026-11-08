@@ -54,6 +54,7 @@ button { font: inherit; color: inherit; }
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 28px; padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
   transition: opacity .8s ease, transform .9s var(--ease);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
 }
 .stage.gone { opacity: 0; transform: scale(1.04); pointer-events: none; }
 .stage-eyebrow {
