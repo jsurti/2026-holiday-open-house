@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/api/invite" }
+  ],
+  "functions": {
+    "api/invite.js": { "includeFiles": "templates/**" }
+  },
+  "headers": [
+    {
+      "source": "/(fonts|assets)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

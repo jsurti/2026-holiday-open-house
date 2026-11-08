@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Holiday Open House · Elizabeth &amp; Jinal</title>
+  <meta name="description" content="Elizabeth &amp; Jinal invite you to their Holiday Open House on Sunday 6 December, from 4pm. Live carols &amp; music. Tap to RSVP.">
+  <meta name="theme-color" content="#0d2417">
+
+  <!-- Link preview (WhatsApp, iMessage, Slack, etc.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Elizabeth &amp; Jinal">
+  <meta property="og:url" content="{{ORIGIN}}/">
+  <meta property="og:title" content="You're invited: Holiday Open House">
+  <meta property="og:description" content="Elizabeth &amp; Jinal · Sunday 6 December, from 4pm · Live carols &amp; music. Tap to RSVP.">
+  <meta property="og:image" content="{{ORIGIN}}/og.jpg?v=1">
+  <meta property="og:image:secure_url" content="{{ORIGIN}}/og.jpg?v=1">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Holiday Open House invitation from Elizabeth and Jinal">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ORIGIN}}/og.jpg?v=1">
+
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/pinyon-script-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/invite.css?v=1">
+</head>
+<body>
+  <canvas id="snow" aria-hidden="true"></canvas>
+
+  <!-- ============ Envelope ============ -->
+  <section id="stage" class="stage" aria-label="Your invitation">
+    <p class="stage-eyebrow">Elizabeth &amp; Jinal request your company</p>
+    <button id="envelope" class="env" type="button" aria-label="Open your invitation">
+      <span class="env-back"></span>
+      <span class="env-card">
+        <span class="env-card-inner">
+          <span class="mini-script">Holiday</span>
+          <span class="mini-script">Open House</span>
+          <span class="mini-caps">Sunday · 6 December</span>
+        </span>
+      </span>
+      <span class="env-pocket"></span>
+      <span class="env-flap">
+        <span class="flap-face flap-front"></span>
+        <span class="flap-face flap-back"></span>
+      </span>
+      <span class="env-seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="wax" cx="38%" cy="32%" r="75%">
+              <stop offset="0" stop-color="#f1dc9c"/>
+              <stop offset=".45" stop-color="#c9a24f"/>
+              <stop offset="1" stop-color="#8a6526"/>
+            </radialGradient>
+          </defs>
+          <path fill="url(#wax)" d="M50 4c6 0 9 4 14 5s10-1 13 3 2 9 5 13 8 6 9 11-3 9-3 14 4 9 3 14-6 7-9 11-1 10-5 13-9 1-13 3-8 5-14 5-9-4-14-5-10 1-13-3-2-9-5-13-8-6-9-11 3-9 3-14-4-9-3-14 6-7 9-11 1-10 5-13 9-1 13-3 8-5 14-5z"/>
+          <circle cx="50" cy="50" r="31" fill="none" stroke="#7c5a1f" stroke-opacity=".55" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="27" fill="none" stroke="#fff3cf" stroke-opacity=".35" stroke-width="1"/>
+          <text x="50" y="60" text-anchor="middle" font-family="Pinyon Script, cursive" font-size="30" fill="#6f4f17" fill-opacity=".85">E&amp;J</text>
+        </svg>
+      </span>
+    </button>
+    <p class="stage-hint"><span>Tap to open</span></p>
+  </section>
+
+  <!-- ============ Invitation ============ -->
+  <main id="invite" class="invite" hidden>
+    <article class="card card-hero">
+      <div class="card-border">
+        <svg class="holly" viewBox="0 0 200 70" aria-hidden="true">
+          <g fill="#1f4a31">
+            <path d="M100 38c-12-4-22-14-46-12 4 4 2 9 6 11-5 1-7 6-12 7 8 4 18 2 24 5 7 3 14-4 28-11z"/>
+            <path d="M100 38c12-4 22-14 46-12-4 4-2 9-6 11 5 1 7 6 12 7-8 4-18 2-24 5-7 3-14-4-28-11z"/>
+          </g>
+          <g fill="#2d6343">
+            <path d="M100 36c-8-8-10-22-26-30 1 5-3 8-1 12-5-1-9 2-13 1 5 7 14 9 18 14 5 5 13 3 22 3z"/>
+            <path d="M100 36c8-8 10-22 26-30-1 5 3 8 1 12 5-1 9 2 13 1-5 7-14 9-18 14-5 5-13 3-22 3z"/>
+          </g>
+          <path d="M70 31c10 3 20 5 30 7 10-2 20-4 30-7" fill="none" stroke="#173a26" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="93" cy="42" r="6.5" fill="#9c1c25"/><circle cx="107" cy="42" r="6.5" fill="#9c1c25"/><circle cx="100" cy="51" r="6.5" fill="#b3232d"/>
+          <circle cx="91" cy="40" r="1.8" fill="#fff" opacity=".55"/><circle cx="105" cy="40" r="1.8" fill="#fff" opacity=".55"/><circle cx="98" cy="49" r="1.8" fill="#fff" opacity=".55"/>
+        </svg>
+
+        <h1 class="title"><span>Holiday</span><span>Open House</span></h1>
+
+        <p class="hosted"><em>hosted by</em></p>
+        <p class="caps hosts">Elizabeth &amp; Jinal</p>
+
+        <div class="rule" aria-hidden="true"><span>❄</span></div>
+
+        <p class="label">When</p>
+        <p class="detail">Sunday, the sixth of December</p>
+        <p class="detail-sub">from four o’clock in the afternoon</p>
+
+        <div class="rule" aria-hidden="true"><span>❄</span></div>
+
+        <p class="label">Where</p>
+        <a class="detail detail-link" href="https://www.google.com/maps/search/?api=1&amp;query=11+Exhibition+Road+London+SW7+2HE" target="_blank" rel="noopener">
+          Flat 1, 11 Exhibition Road<br>London SW7 2HE
+        </a>
+
+        <div class="rule" aria-hidden="true"><span>❄</span></div>
+
+        <p class="message">Please join us for an afternoon of live carols, music and festive cheer.</p>
+        <p class="message-sub">Little ones and plus-ones are most welcome.</p>
+
+        <div class="actions">
+          <a class="btn btn-gold" href="#rsvp">RSVP</a>
+          <div class="cal">
+            <button class="btn btn-ghost" type="button" id="calBtn" aria-expanded="false" aria-controls="calMenu">Add to calendar</button>
+            <div class="cal-menu" id="calMenu" hidden>
+              <a href="/holiday-open-house.ics">Apple / Outlook</a>
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Holiday+Open+House+%C2%B7+Elizabeth+%26+Jinal&amp;dates=20261206T160000Z/20261206T200000Z&amp;location=Flat+1,+11+Exhibition+Road,+London+SW7+2HE&amp;details=Live+carols,+music+and+festive+cheer.+From+4pm." target="_blank" rel="noopener">Google Calendar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- RSVP -->
+    <section class="card panel" id="rsvp" aria-labelledby="rsvpTitle">
+      <h2 class="script-h" id="rsvpTitle">Kindly reply</h2>
+
+      <div id="rsvpDone" class="rsvp-done" hidden>
+        <p class="done-msg" id="doneMsg"></p>
+        <button class="btn btn-ghost" type="button" id="changeReply">Change my reply</button>
+      </div>
+
+      <form id="rsvpForm" class="form" novalidate>
+        <fieldset class="choices">
+          <legend class="sr">Will you be joining us?</legend>
+          <label class="choice"><input type="radio" name="status" value="yes"><span><b>Yes</b><small>with pleasure</small></span></label>
+          <label class="choice"><input type="radio" name="status" value="maybe"><span><b>Maybe</b><small>hoping to</small></span></label>
+          <label class="choice"><input type="radio" name="status" value="no"><span><b>No</b><small>sadly not</small></span></label>
+        </fieldset>
+
+        <label class="field"><span>Your name</span>
+          <input name="name" autocomplete="name" maxlength="80" placeholder="e.g. Sarah &amp; Tom Lau" required>
+        </label>
+
+        <div class="if-coming">
+          <div class="field">
+            <span id="partyLbl">Number in your party</span>
+            <div class="stepper" role="group" aria-labelledby="partyLbl">
+              <button type="button" data-step="-1" aria-label="One fewer">−</button>
+              <output id="partyOut">1</output>
+              <button type="button" data-step="1" aria-label="One more">+</button>
+            </div>
+            <small class="hint">Including yourself and any little ones</small>
+          </div>
+          <label class="field"><span>Dietary needs <i>(optional)</i></span>
+            <input name="dietary" maxlength="300" placeholder="Vegetarian, nut allergy, no alcohol…">
+          </label>
+        </div>
+
+        <label class="field"><span>A note for Elizabeth &amp; Jinal <i>(optional)</i></span>
+          <textarea name="note" rows="3" maxlength="1000" placeholder="Only the hosts will see this"></textarea>
+        </label>
+
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-error" id="rsvpError" role="alert" hidden></p>
+        <button class="btn btn-red btn-wide" type="submit" id="rsvpSubmit">Send my reply</button>
+      </form>
+    </section>
+
+    <!-- Guest list -->
+    <section class="card panel" aria-labelledby="guestsTitle">
+      <h2 class="script-h" id="guestsTitle">Who’s coming</h2>
+      <p class="tally" id="tally">&nbsp;</p>
+      <ul class="guests" id="guestList"></ul>
+      <p class="maybes" id="maybeList" hidden></p>
+    </section>
+
+    <!-- Comment wall -->
+    <section class="card panel" id="wall" aria-labelledby="wallTitle">
+      <h2 class="script-h" id="wallTitle">Festive notes</h2>
+      <p class="panel-sub">Leave a message for the hosts and fellow guests</p>
+      <form id="wallForm" class="form wall-form" novalidate>
+        <label class="field"><span>Your name</span>
+          <input name="name" autocomplete="name" maxlength="80" required>
+        </label>
+        <label class="field"><span>Message</span>
+          <textarea name="message" rows="3" maxlength="600" placeholder="Can’t wait! We’ll bring the mince pies…" required></textarea>
+        </label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="form-error" id="wallError" role="alert" hidden></p>
+        <button class="btn btn-gold btn-wide" type="submit">Post message</button>
+      </form>
+      <ol class="posts" id="posts"></ol>
+    </section>
+
+    <footer class="foot">
+      <p class="script-sm">With love,</p>
+      <p class="caps">Elizabeth &amp; Jinal</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/assets/invite.js?v=1" defer></script>
+</body>
+</html>

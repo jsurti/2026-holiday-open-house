@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d2417">
+  <title>Host · Holiday Open House</title>
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/invite.css?v=1">
+  <style>
+    body { font-size: 18px; }
+    .wrap { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; padding: calc(18px + env(safe-area-inset-top)) 14px 48px; display: grid; gap: 18px; }
+    .top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; color: var(--ivory); }
+    .top h1 { margin: 0; font-family: var(--script); font-weight: 400; font-size: 40px; color: var(--ivory); }
+    .top a { color: var(--gold-lt); font-size: 16px; }
+    .panel { padding: 22px 18px; }
+    .panel h2 { margin: 0 0 12px; font-size: 13.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-dk); font-weight: 600; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .stat { text-align: center; padding: 12px 4px; border-radius: 10px; background: #fff; border: 1px solid #ece2c8; }
+    .stat b { display: block; font-size: 34px; line-height: 1; font-weight: 600; color: var(--pine); }
+    .stat span { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .stat.red b { color: var(--red); } .stat.grey b { color: #6b716b; } .stat.gold b { color: var(--gold-dk); }
+    @media (max-width: 460px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+    .tools { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tools .btn { min-height: 42px; padding: 0 16px; font-size: 13.5px; }
+    .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .filters button { border: 1px solid #d9caa2; background: #fff; border-radius: 999px; padding: 6px 14px; font-size: 16px; cursor: pointer; }
+    .filters button.on { background: var(--pine); color: var(--ivory); border-color: var(--pine); }
+    .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .row { background: #fff; border: 1px solid #ece2c8; border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+    .row-h { display: flex; align-items: center; gap: 10px; }
+    .row-h b { font-size: 19px; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+    .pill { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; font-weight: 600; flex: none; }
+    .pill.yes { background: #e2efe6; color: var(--pine); } .pill.maybe { background: #f6ecd2; color: var(--gold-dk); } .pill.no { background: #eceeec; color: #5b625c; }
+    .meta { font-size: 15.5px; color: var(--muted); }
+    .meta em { color: var(--ink); font-style: normal; }
+    .x { border: 0; background: none; color: var(--red); cursor: pointer; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; padding: 4px; flex: none; }
+    .empty { text-align: center; font-style: italic; color: var(--muted); padding: 10px; }
+    .diet { margin: 0; padding-left: 18px; } .diet li { margin: 3px 0; }
+    .gate { max-width: 400px; margin: 12vh auto 0; }
+    .gate p { text-align: center; font-style: italic; color: var(--muted); margin: 0 0 14px; }
+    textarea.share { width: 100%; min-height: 200px; font: inherit; font-size: 17px; padding: 12px; border-radius: 8px; border: 1px solid #d9caa2; }
+  </style>
+</head>
+<body>
+  <canvas id="snow" aria-hidden="true" hidden></canvas>
+
+  <div class="wrap" id="gate">
+    <section class="card panel gate">
+      <h2 class="script-h" style="font-size:40px;letter-spacing:0;text-transform:none;color:var(--pine);text-align:center">Host view</h2>
+      <p>Enter your host password</p>
+      <form id="gateForm" class="form">
+        <label class="field"><span>Password</span><input type="password" id="key" autocomplete="current-password" required></label>
+        <p class="form-error" id="gateErr" hidden></p>
+        <button class="btn btn-red btn-wide" type="submit">Open</button>
+      </form>
+    </section>
+  </div>
+
+  <div class="wrap" id="app" hidden>
+    <div class="top"><h1>Your guests</h1><a href="/" target="_blank">View invite ↗</a></div>
+
+    <section class="card panel">
+      <div class="stats">
+        <div class="stat"><b id="sPeople">0</b><span>Coming</span></div>
+        <div class="stat gold"><b id="sMaybe">0</b><span>Maybe</span></div>
+        <div class="stat grey"><b id="sNo">0</b><span>Can’t come</span></div>
+        <div class="stat red"><b id="sReplies">0</b><span>Replies</span></div>
+      </div>
+      <p class="meta" style="text-align:center;margin:10px 0 0">Coming / maybe count people (party sizes); replies counts households.</p>
+    </section>
+
+    <section class="card panel">
+      <h2>Share</h2>
+      <textarea class="share" id="shareText" readonly></textarea>
+      <div class="tools" style="margin-top:10px">
+        <button class="btn btn-gold" id="copyShare" type="button">Copy message</button>
+        <a class="btn btn-ghost" id="waShare" target="_blank" rel="noopener">Open WhatsApp</a>
+        <button class="btn btn-ghost" id="csv" type="button">Export CSV</button>
+        <button class="btn btn-ghost" id="refresh" type="button">Refresh</button>
+      </div>
+    </section>
+
+    <section class="card panel">
+      <h2>Replies</h2>
+      <div class="filters" id="filters">
+        <button data-f="all" class="on">All</button><button data-f="yes">Yes</button><button data-f="maybe">Maybe</button><button data-f="no">No</button>
+      </div>
+      <ul class="list" id="rsvps"></ul>
+    </section>
+
+    <section class="card panel">
+      <h2>Dietary needs</h2>
+      <ul class="diet" id="diet"></ul>
+    </section>
+
+    <section class="card panel">
+      <h2>Comment wall</h2>
+      <ul class="list" id="comments"></ul>
+    </section>
+
+    <p style="text-align:center"><button class="btn btn-ghost" id="logout" style="color:var(--gold-lt)">Sign out</button></p>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const KEY = 'hoh26:hostkey';
+  let key = ''; try { key = localStorage.getItem(KEY) || ''; } catch {}
+  let data = { rsvps: [], comments: [] }, filter = 'all';
+
+  function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2200); }
+
+  async function call(method, body) {
+    const res = await fetch('/api/admin', { method, headers: { 'Content-Type': 'application/json', 'x-host-key': key }, body: body ? JSON.stringify(body) : undefined });
+    const j = await res.json().catch(() => ({}));
+    if (res.status === 401) throw Object.assign(new Error(j.error || 'Incorrect password'), { auth: true });
+    if (!res.ok) throw new Error(j.error || 'Something went wrong');
+    return j;
+  }
+
+  async function load() {
+    try {
+      data = await call('GET');
+      $('#gate').hidden = true; $('#app').hidden = false;
+      render();
+    } catch (e) {
+      if (e.auth) { key = ''; try { localStorage.removeItem(KEY); } catch {} $('#app').hidden = true; $('#gate').hidden = false; }
+      throw e;
+    }
+  }
+
+  const when = ts => new Date(ts).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+
+  function render() {
+    const r = data.rsvps;
+    const sum = s => r.filter(x => x.status === s).reduce((a, x) => a + (x.party || 0), 0);
+    $('#sPeople').textContent = sum('yes');
+    $('#sMaybe').textContent = sum('maybe');
+    $('#sNo').textContent = r.filter(x => x.status === 'no').length;
+    $('#sReplies').textContent = r.length;
+
+    const shown = filter === 'all' ? r : r.filter(x => x.status === filter);
+    $('#rsvps').innerHTML = shown.length ? shown.map(x => `
+      <li class="row">
+        <div class="row-h"><b>${esc(x.name)}</b><span class="pill ${x.status}">${x.status}${x.status !== 'no' ? ' · ' + x.party : ''}</span>
+        <button class="x" data-del-rsvp="${esc(x.id)}" aria-label="Delete reply from ${esc(x.name)}">Delete</button></div>
+        ${x.dietary ? `<div class="meta">Dietary: <em>${esc(x.dietary)}</em></div>` : ''}
+        ${x.note ? `<div class="meta">Note: <em>${esc(x.note)}</em></div>` : ''}
+        <div class="meta">${x.updatedAt !== x.createdAt ? 'Updated' : 'Replied'} ${when(x.updatedAt)}</div>
+      </li>`).join('') : '<li class="empty">No replies here yet</li>';
+
+    const d = r.filter(x => x.dietary && x.status !== 'no');
+    $('#diet').innerHTML = d.length ? d.map(x => `<li><b>${esc(x.name)}</b> — ${esc(x.dietary)}</li>`).join('') : '<li class="empty" style="list-style:none">None so far</li>';
+
+    $('#comments').innerHTML = data.comments.length ? data.comments.map(c => `
+      <li class="row">
+        <div class="row-h"><b>${esc(c.name)}</b><span class="meta">${when(c.createdAt)}</span>
+        <button class="x" data-del-comment="${esc(c.id)}">Delete</button></div>
+        <div style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(c.message)}</div>
+      </li>`).join('') : '<li class="empty">No messages yet</li>';
+  }
+
+  const shareMsg = () => `You're invited! 🎄\n\nElizabeth & Jinal's Holiday Open House\nSunday 6 December, from 4pm\nLive carols & music — little ones and plus-ones welcome.\n\nPlease RSVP here:\n${location.origin}/`;
+  $('#shareText').value = shareMsg();
+  $('#waShare').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg());
+  $('#copyShare').onclick = async () => { try { await navigator.clipboard.writeText(shareMsg()); toast('Copied'); } catch { $('#shareText').select(); document.execCommand('copy'); toast('Copied'); } };
+
+  $('#csv').onclick = () => {
+    const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const rows = [['Name', 'Reply', 'Party', 'Dietary', 'Note', 'Replied', 'Updated']]
+      .concat(data.rsvps.map(x => [x.name, x.status, x.party, x.dietary, x.note, new Date(x.createdAt).toISOString(), new Date(x.updatedAt).toISOString()]));
+    const blob = new Blob(['﻿' + rows.map(r => r.map(q).join(',')).join('\r\n')], { type: 'text/csv' });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: 'holiday-open-house-rsvps.csv' });
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  $('#refresh').onclick = () => load().then(() => toast('Up to date')).catch(e => toast(e.message));
+  $('#logout').onclick = () => { try { localStorage.removeItem(KEY); } catch {} location.reload(); };
+  $('#filters').onclick = e => { const b = e.target.closest('button'); if (!b) return; filter = b.dataset.f; document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('on', x === b)); render(); };
+
+  document.addEventListener('click', async e => {
+    const r = e.target.closest('[data-del-rsvp]'), c = e.target.closest('[data-del-comment]');
+    if (!r && !c) return;
+    if (!confirm(r ? 'Delete this reply? This cannot be undone.' : 'Delete this message from the wall?')) return;
+    try {
+      await call('POST', r ? { action: 'deleteRsvp', id: r.dataset.delRsvp } : { action: 'deleteComment', id: c.dataset.delComment });
+      toast('Deleted'); await load();
+    } catch (ex) { toast(ex.message); }
+  });
+
+  $('#gateForm').onsubmit = async e => {
+    e.preventDefault();
+    key = $('#key').value; $('#gateErr').hidden = true;
+    try { await load(); try { localStorage.setItem(KEY, key); } catch {} }
+    catch (ex) { $('#gateErr').textContent = ex.message; $('#gateErr').hidden = false; }
+  };
+
+  if (key) load().catch(() => {});
+  setInterval(() => { if (key && !document.hidden) load().catch(() => {}); }, 30000);
+})();
+</script>
+</body>
+</html>

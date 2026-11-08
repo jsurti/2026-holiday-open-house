@@ -1,0 +1,16 @@
+{
+  "name": "holiday-open-house",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Holiday Open House invitation with RSVPs and a comment wall",
+  "scripts": {
+    "dev": "node dev-server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.41.0"
+  }
+}
