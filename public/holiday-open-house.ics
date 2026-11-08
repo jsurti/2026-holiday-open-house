@@ -5,12 +5,12 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:holiday-open-house-2026@elizabeth-jinal
-DTSTAMP:20261107T120000Z
+DTSTAMP:20261108T160000Z
 DTSTART:20261206T160000Z
-DTEND:20261206T200000Z
+DTEND:20261206T190000Z
 SUMMARY:Holiday Open House · Elizabeth & Jinal
 LOCATION:Flat 1\, 11 Exhibition Road\, London SW7 2HE
-DESCRIPTION:Live carols\, music and festive cheer. From 4pm. Little ones and plus-ones welcome.
+DESCRIPTION:An evening of festive cheer\, 4–7pm. Little ones\, plus-ones and four-legged friends welcome.
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY

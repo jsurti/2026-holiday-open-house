@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Holiday Open House · Elizabeth &amp; Jinal</title>
-  <meta name="description" content="Elizabeth &amp; Jinal invite you to their Holiday Open House on Sunday 6 December, from 4pm. Live carols &amp; music. Tap to RSVP.">
+  <meta name="description" content="Elizabeth &amp; Jinal invite you to their Holiday Open House on Sunday 6 December, 4–7pm. Kindly reply by 29 November.">
   <meta name="theme-color" content="#0d2417">
 
   <!-- Link preview (WhatsApp, iMessage, Slack, etc.) -->
@@ -12,28 +12,28 @@
   <meta property="og:site_name" content="Elizabeth &amp; Jinal">
   <meta property="og:url" content="{{ORIGIN}}/">
   <meta property="og:title" content="You're invited: Holiday Open House">
-  <meta property="og:description" content="Elizabeth &amp; Jinal · Sunday 6 December, from 4pm · Live carols &amp; music. Tap to RSVP.">
-  <meta property="og:image" content="{{ORIGIN}}/og.jpg?v=1">
-  <meta property="og:image:secure_url" content="{{ORIGIN}}/og.jpg?v=1">
+  <meta property="og:description" content="Elizabeth &amp; Jinal · Sunday 6 December, 4–7pm · Tap to RSVP by 29 November.">
+  <meta property="og:image" content="{{ORIGIN}}/og.jpg?v=2">
+  <meta property="og:image:secure_url" content="{{ORIGIN}}/og.jpg?v=2">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Holiday Open House invitation from Elizabeth and Jinal">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ORIGIN}}/og.jpg?v=1">
+  <meta name="twitter:image" content="{{ORIGIN}}/og.jpg?v=2">
 
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" href="/fonts/pinyon-script-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/assets/invite.css?v=1">
+  <link rel="stylesheet" href="/assets/invite.css?v=2">
 </head>
 <body>
   <canvas id="snow" aria-hidden="true"></canvas>
 
   <!-- ============ Envelope ============ -->
   <section id="stage" class="stage" aria-label="Your invitation">
-    <p class="stage-eyebrow">Elizabeth &amp; Jinal request your company</p>
+    <p class="stage-eyebrow">Elizabeth &amp; Jinal invite you over</p>
     <button id="envelope" class="env" type="button" aria-label="Open your invitation">
       <span class="env-back"></span>
       <span class="env-card">
@@ -94,7 +94,7 @@
 
         <p class="label">When</p>
         <p class="detail">Sunday, the sixth of December</p>
-        <p class="detail-sub">from four o’clock in the afternoon</p>
+        <p class="detail-sub">from four until seven o’clock</p>
 
         <div class="rule" aria-hidden="true"><span>❄</span></div>
 
@@ -105,8 +105,9 @@
 
         <div class="rule" aria-hidden="true"><span>❄</span></div>
 
-        <p class="message">Please join us for an afternoon of live carols, music and festive cheer.</p>
-        <p class="message-sub">Little ones and plus-ones are most welcome.</p>
+        <p class="message">Please join us for an evening of festive&nbsp;cheer.</p>
+        <p class="message-sub">Little ones, plus-ones and four-legged friends,<br>all are welcome till the evening ends.</p>
+        <p class="reply-by">Kindly reply by<br>Sunday, 29 November</p>
 
         <div class="actions">
           <a class="btn btn-gold" href="#rsvp">RSVP</a>
@@ -114,7 +115,7 @@
             <button class="btn btn-ghost" type="button" id="calBtn" aria-expanded="false" aria-controls="calMenu">Add to calendar</button>
             <div class="cal-menu" id="calMenu" hidden>
               <a href="/holiday-open-house.ics">Apple / Outlook</a>
-              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Holiday+Open+House+%C2%B7+Elizabeth+%26+Jinal&amp;dates=20261206T160000Z/20261206T200000Z&amp;location=Flat+1,+11+Exhibition+Road,+London+SW7+2HE&amp;details=Live+carols,+music+and+festive+cheer.+From+4pm." target="_blank" rel="noopener">Google Calendar</a>
+              <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Holiday+Open+House+%C2%B7+Elizabeth+%26+Jinal&amp;dates=20261206T160000Z/20261206T190000Z&amp;location=Flat+1,+11+Exhibition+Road,+London+SW7+2HE&amp;details=An+evening+of+festive+cheer.+Little+ones,+plus-ones+and+four-legged+friends+welcome." target="_blank" rel="noopener">Google Calendar</a>
             </div>
           </div>
         </div>
@@ -124,6 +125,7 @@
     <!-- RSVP -->
     <section class="card panel" id="rsvp" aria-labelledby="rsvpTitle">
       <h2 class="script-h" id="rsvpTitle">Kindly reply</h2>
+      <p class="panel-sub">by Sunday, 29 November</p>
 
       <div id="rsvpDone" class="rsvp-done" hidden>
         <p class="done-msg" id="doneMsg"></p>
@@ -139,7 +141,7 @@
         </fieldset>
 
         <label class="field"><span>Your name</span>
-          <input name="name" autocomplete="name" maxlength="80" placeholder="e.g. Sarah &amp; Tom Lau" required>
+          <input name="name" autocomplete="name" maxlength="80" placeholder="Your name(s)" required>
         </label>
 
         <div class="if-coming">
@@ -194,12 +196,12 @@
     </section>
 
     <footer class="foot">
-      <p class="script-sm">With love,</p>
+      <p class="script-sm">Merry &amp; bright,</p>
       <p class="caps">Elizabeth &amp; Jinal</p>
     </footer>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="/assets/invite.js?v=1" defer></script>
+  <script src="/assets/invite.js?v=2" defer></script>
 </body>
 </html>

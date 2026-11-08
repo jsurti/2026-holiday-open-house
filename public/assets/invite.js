@@ -30,24 +30,51 @@
     return data;
   }
 
-  /* ---------------- Snow ---------------- */
+  /* ---------------- Snow & festive shapes ---------------- */
   (function snow() {
     const c = $('#snow'), ctx = c.getContext('2d');
-    let w, h, dpr, flakes = [];
-    const count = () => Math.round(Math.min(110, (w * h) / 9000));
+    const svg = b => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">${b}</svg>`;
+    const GOLD = '#e3c67e';
+    const SPRITES = {
+      note: svg(`<g fill="${GOLD}"><ellipse cx="14" cy="30" rx="6.5" ry="4.6" transform="rotate(-22 14 30)"/><rect x="18.6" y="5" width="2.4" height="25" rx="1"/><path d="M21 5c1.5 6 9.5 7 9 15-1.5-4.5-4.5-6-9-7z"/></g>`),
+      notes: svg(`<g fill="${GOLD}"><ellipse cx="10" cy="31" rx="5.6" ry="4" transform="rotate(-22 10 31)"/><ellipse cx="28" cy="27" rx="5.6" ry="4" transform="rotate(-22 28 27)"/><rect x="13.9" y="9" width="2.2" height="22"/><rect x="31.9" y="5" width="2.2" height="22"/><path d="M13.9 9 34.1 5v5.2L13.9 14.2z"/></g>`),
+      mistletoe: svg(`<path d="M20 4v17" stroke="#3f6f4a" stroke-width="1.8" stroke-linecap="round"/><path d="M20 20C13 19 6 15 4 8c7 1 13 5 16 12z" fill="#6aa877"/><path d="M20 20c7-1 14-5 16-12-7 1-13 5-16 12z" fill="#549660"/><path d="M20 21c-4 3-9 5-13 4 3-4 8-6 13-4z" fill="#4c8a58"/><path d="M20 21c4 3 9 5 13 4-3-4-8-6-13-4z" fill="#5f9f6c"/><g fill="#f6f2e2" stroke="#d9d2b8" stroke-width=".6"><circle cx="16.5" cy="25" r="3.2"/><circle cx="23.5" cy="25" r="3.2"/><circle cx="20" cy="30" r="3.2"/></g><g fill="#fff" opacity=".8"><circle cx="15.6" cy="24" r="1"/><circle cx="22.6" cy="24" r="1"/><circle cx="19.1" cy="29" r="1"/></g>`),
+      holly: svg(`<path d="M6 32c2-3 1-6 4-7-1-3 1-6 4-6 0-3 3-5 6-4 1-3 4-4 7-3 1-3 4-4 7-3-1 3 1 6-2 8 1 3-1 6-4 6 0 3-3 5-6 4-1 3-4 4-7 3-1 3-4 4-7 3-1 0-1-1-2-1z" fill="#3f7d52"/><path d="M8 31 32 9" stroke="#2d5e3c" stroke-width="1.2"/><circle cx="30" cy="30" r="4" fill="#b3232d"/><circle cx="24" cy="33" r="4" fill="#9c1c25"/><circle cx="29" cy="29" r="1.2" fill="#fff" opacity=".6"/>`),
+      star: svg(`<path fill="${GOLD}" d="M20 4l4.4 10.2 11 .9-8.4 7.2 2.6 10.8L20 27.4l-9.6 5.7 2.6-10.8-8.4-7.2 11-.9z"/>`),
+      bauble: svg(`<defs><radialGradient id="g" cx="38%" cy="35%" r="70%"><stop offset="0" stop-color="#d64550"/><stop offset=".55" stop-color="#a3202a"/><stop offset="1" stop-color="#6d1219"/></radialGradient></defs><path d="M20 3a3 3 0 0 1 0 6" fill="none" stroke="${GOLD}" stroke-width="1.6"/><rect x="16" y="8" width="8" height="5" rx="1" fill="${GOLD}"/><circle cx="20" cy="25" r="12.5" fill="url(#g)"/><path d="M8.5 23c7 3 16 3 23 0" stroke="${GOLD}" stroke-width="1.4" fill="none" opacity=".9"/><ellipse cx="15.5" cy="19" rx="3" ry="2" fill="#fff" opacity=".45"/>`),
+    };
+    const WEIGHTS = [['note', 3], ['notes', 3], ['mistletoe', 3], ['holly', 2], ['star', 2], ['bauble', 2]];
+    const TOTAL = WEIGHTS.reduce((a, [, n]) => a + n, 0);
+    const imgs = {};
+    for (const [k, v] of Object.entries(SPRITES)) {
+      const im = new Image(); im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(v); imgs[k] = im;
+    }
+    const pick = () => { let r = Math.random() * TOTAL; for (const [k, n] of WEIGHTS) { if ((r -= n) < 0) return k; } return 'note'; };
+
+    let w, h, dpr, flakes = [], orns = [];
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = c.width = innerWidth * dpr; h = c.height = innerHeight * dpr;
       w /= dpr; h /= dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = reduceMotion ? 30 : count();
+      const area = w * h;
+      const n = reduceMotion ? 30 : Math.round(Math.min(95, area / 10000));
+      const m = Math.round(Math.max(6, Math.min(16, area / 45000)));
       while (flakes.length < n) flakes.push(flake(true));
       flakes.length = n;
+      while (orns.length < m) orns.push(orn(true));
+      orns.length = m;
     }
     function flake(anywhere) {
       const r = Math.random() ** 2 * 2.6 + .6;
       return { x: Math.random() * w, y: anywhere ? Math.random() * h : -10, r,
         vy: .25 + r * .28, sway: Math.random() * Math.PI * 2, swaySp: .004 + Math.random() * .01,
         a: .35 + Math.random() * .55, gold: Math.random() < .12 };
+    }
+    function orn(anywhere) {
+      const s = 18 + Math.random() * 12;
+      return { k: pick(), s, x: Math.random() * w, y: anywhere ? Math.random() * h : -s - 10,
+        vy: .3 + Math.random() * .3, sway: Math.random() * Math.PI * 2, swaySp: .006 + Math.random() * .008,
+        rot: (Math.random() - .5) * .8, vr: (Math.random() - .5) * .01, a: .7 + Math.random() * .25 };
     }
     function draw() {
       ctx.clearRect(0, 0, w, h);
@@ -57,6 +84,16 @@
         ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
         ctx.fill();
       }
+      for (const o of orns) {
+        const im = imgs[o.k];
+        if (!im.complete || !im.naturalWidth) continue;
+        ctx.save();
+        ctx.globalAlpha = o.a;
+        ctx.translate(o.x, o.y);
+        ctx.rotate(o.rot + Math.sin(o.sway) * .25);
+        ctx.drawImage(im, -o.s / 2, -o.s / 2, o.s, o.s);
+        ctx.restore();
+      }
     }
     function tick() {
       for (const f of flakes) {
@@ -64,13 +101,19 @@
         if (f.y > h + 10) Object.assign(f, flake(false));
         if (f.x > w + 10) f.x = -10; else if (f.x < -10) f.x = w + 10;
       }
+      for (const o of orns) {
+        o.sway += o.swaySp; o.y += o.vy; o.x += Math.sin(o.sway) * .45; o.rot += o.vr;
+        if (o.y > h + o.s + 10) Object.assign(o, orn(false));
+        if (o.x > w + 30) o.x = -30; else if (o.x < -30) o.x = w + 30;
+      }
       draw();
       if (!document.hidden) requestAnimationFrame(tick);
     }
     addEventListener('resize', resize);
     document.addEventListener('visibilitychange', () => { if (!document.hidden && !reduceMotion) requestAnimationFrame(tick); });
     resize();
-    reduceMotion ? draw() : requestAnimationFrame(tick);
+    if (reduceMotion) { draw(); Object.values(imgs).forEach(im => im.addEventListener('load', draw)); }
+    else requestAnimationFrame(tick);
   })();
 
   /* ---------------- Envelope ---------------- */

@@ -8,7 +8,7 @@
   <title>Host · Holiday Open House</title>
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/assets/invite.css?v=1">
+  <link rel="stylesheet" href="/assets/invite.css?v=2">
   <style>
     body { font-size: 18px; }
     .wrap { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; padding: calc(18px + env(safe-area-inset-top)) 14px 48px; display: grid; gap: 18px; }
@@ -166,7 +166,7 @@
       </li>`).join('') : '<li class="empty">No messages yet</li>';
   }
 
-  const shareMsg = () => `You're invited! 🎄\n\nElizabeth & Jinal's Holiday Open House\nSunday 6 December, from 4pm\nLive carols & music — little ones and plus-ones welcome.\n\nPlease RSVP here:\n${location.origin}/`;
+  const shareMsg = () => `You're invited! 🎄\n\nElizabeth & Jinal's Holiday Open House\nSunday 6 December, 4–7pm\nLittle ones, plus-ones and four-legged friends all welcome.\n\nKindly RSVP by Sunday 29 November:\n${location.origin}/`;
   $('#shareText').value = shareMsg();
   $('#waShare').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg());
   $('#copyShare').onclick = async () => { try { await navigator.clipboard.writeText(shareMsg()); toast('Copied'); } catch { $('#shareText').select(); document.execCommand('copy'); toast('Copied'); } };
