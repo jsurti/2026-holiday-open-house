@@ -5,7 +5,7 @@
     get(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
   };
-  const K_RSVP = 'hoh26:rsvp', K_POSTS = 'hoh26:posts', K_SEEN = 'hoh26:opened', K_NAME = 'hoh26:name';
+  const K_RSVP = 'hoh26:rsvp', K_POSTS = 'hoh26:posts', K_NAME = 'hoh26:name';
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -125,13 +125,12 @@
     setTimeout(() => stage.remove(), 900);
     if (location.hash) setTimeout(() => document.querySelector(location.hash)?.scrollIntoView(), 60);
   }
-  const deepLink = /^#(rsvp|wall)$/.test(location.hash);
-  if (store.get(K_SEEN) || deepLink) {
-    showInvite(false);
-  } else {
+  // Always start at the envelope, even on refresh or a return visit.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+  {
     env.addEventListener('click', () => {
       if (env.classList.contains('open')) return;
-      store.set(K_SEEN, true);
       stage.classList.add('opening');
       env.classList.add('open');
       if (navigator.vibrate) try { navigator.vibrate(12); } catch {}
